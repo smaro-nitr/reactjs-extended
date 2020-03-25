@@ -1,0 +1,23 @@
+{
+  "name": "reactjs-extended",
+  "version": "0.0.0-beta",
+  "description": "Extended CLI for ReactJs repetative task",
+  "scripts": {
+    "debug-ts-component": "node app/createTsComponent.js",
+    "debug-js-component": "node app/createJsComponent.js"
+  },
+  "bin": {
+    "re-ts-component": "app/createTsComponent.js",
+    "re-js-component": "app/createJsComponent.js"
+  },
+  "author": "Subhendu Kumar Sahoo <smaro.nitr@gmail.com>",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/smaro-nitr/reactjs-extended.git"
+  },
+  "bugs": {
+    "url": "https://github.com/smaro-nitr/reactjs-extended/issues"
+  },
+  "homepage": "https://github.com/smaro-nitr/reactjs-extended#readme"
+}
