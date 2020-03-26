@@ -20,8 +20,14 @@ const getCustomArgs = args => {
   return customArgs
 }
 
-const generateComponentFolder = (basePath, componentName = 'default') => {
-  const outputFolderPath = path.join(basePath, componentName)
+const getTemplateBasePath = () => {
+  const npmGlobalPath =  process.env.npm_config_prefix
+  const templateBasePath = path.join(npmGlobalPath, 'node_modules', 'reactjs-extended')
+  return templateBasePath
+}
+
+const generateComponentFolder = (targetBasePath, componentName = 'default') => {
+  const outputFolderPath = path.join(targetBasePath, componentName)
 
   if (fs.existsSync(outputFolderPath)) {
     console.log(Constant.COLOR.red, Constant.MESSAGE.alreadyExist, Constant.COLOR.reset)
@@ -31,8 +37,8 @@ const generateComponentFolder = (basePath, componentName = 'default') => {
   fs.mkdirSync(outputFolderPath)
 }
 
-const generateComponent = (basePath, componentName = 'default', templateFolderName) => {
-  const componentTemplateFolderPath = path.join(basePath, 'app', 'template', templateFolderName)
+const generateComponent = (targetBasePath, componentName = 'default', templateFolderName) => {
+  const componentTemplateFolderPath = path.join(getTemplateBasePath(), 'app', 'template', templateFolderName)
 
   const componentTemplateFileName = []
   fs.readdirSync(componentTemplateFolderPath).forEach(file => {
@@ -46,7 +52,7 @@ const generateComponent = (basePath, componentName = 'default', templateFolderNa
     const eachFileNewName = eachFileName.replace(/XXX/g, componentName)
     const eachFileNewContent = eachFileContent.replace(/XXX/g, componentName)
 
-    const eachFileOutputPath = path.join(basePath, componentName, eachFileNewName)
+    const eachFileOutputPath = path.join(targetBasePath, componentName, eachFileNewName)
     fs.writeFile(eachFileOutputPath, eachFileNewContent, function(err) {
       if (err) console.log(Constant.COLOR.red, Constant.MESSAGE.standardError, Constant.COLOR.reset)
       console.log(Constant.COLOR.green, `${Constant.MESSAGE.created} ${eachFileOutputPath}`, Constant.COLOR.reset)

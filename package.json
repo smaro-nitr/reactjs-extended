@@ -1,6 +1,6 @@
 {
   "name": "reactjs-extended",
-  "version": "0.0.0-beta",
+  "version": "0.0.1-beta",
   "description": "Extended CLI for ReactJs repetative task",
   "scripts": {
     "debug-ts-component": "node app/createTsComponent.js",
