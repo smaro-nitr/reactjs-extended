@@ -21,7 +21,7 @@ const getCustomArgs = args => {
 }
 
 const getTemplateBasePath = () => {
-  const npmGlobalPath = process.env.npm_config_prefix
+  const npmGlobalPath = process.env.npm_config_prefix || process.env.dp0
   const templateBasePath = path.join(npmGlobalPath, 'node_modules', 'reactjs-extended')
   return templateBasePath
 }
