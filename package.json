@@ -16,6 +16,15 @@
     "type": "git",
     "url": "git+https://github.com/smaro-nitr/reactjs-extended.git"
   },
+  "keywords": [
+    "reactjs",
+    "extended-usability",
+    "typescript component",
+    "javascript component",
+    "smart component",
+    "sub smart component",
+    "dumb component"
+  ],
   "bugs": {
     "url": "https://github.com/smaro-nitr/reactjs-extended/issues"
   },
