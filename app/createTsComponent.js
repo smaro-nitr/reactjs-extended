@@ -7,8 +7,8 @@ const [...args] = process.argv
 const customArgs = Helper.getCustomArgs(args)
 
 const componentName = customArgs.name
-const isDumbComponent = Boolean(customArgs.dumb)
-const templateFolderName = isDumbComponent ? Constant.IO.tsDumbTemplateFolder : Constant.IO.tsTemplateFolder
+const componentType = customArgs.type
+const templateFolderName = Helper.getTemplateFolderName(componentType)
 
 const targetBasePath = process.cwd()
 

@@ -28,17 +28,17 @@ Note: Doesn`t require to be installed as a dependency in your project
   <tr>
   <tr>
     <td><b>--name</b></td>
-    <td>any valid name, lower camel case is preferred</td>
-    <td>default</td>
+    <td>Any valid name, Upper camel case is preferred</td>
+    <td>Default</td>
   </tr>
   <tr>
-    <td><b>--dumb *</b></td>
-    <td>true, false</td>
-    <td>false</td>
+    <td><b>--type *</b></td>
+    <td>SMART, SUB-SMART, DUMB</td>
+    <td>SMART</td>
   </tr>
 </table>
 <br/>
-* optional flag
+* optional flag and value is case senstive
 
 <br/>&nbsp;
 
@@ -47,17 +47,17 @@ Once globally installed. Based on your requirement, it can be used in following 
 
 * If you want to generate <b>typescript</b> based component, use below command -
 ```shell
-re-ts-component --name=componentName
+re-ts-component --name=ComponentName
 ```
 
 * If you want to generate <b>javascript</b> based component, use below command -
 ```shell
-re-js-component --name=componentName
+re-js-component --name=ComponentName
 ```
 
-* Use of <b>dumb</b> flag is optional and can be as follow -
+* Use of <b>type</b> flag is optional and can be as follow -
 ```shell
-re-js-component --name=componentName --dumb=true
+re-js-component --name=ComponentName --type=SUB-SMART
 ```
 
 <br/>&nbsp;
@@ -66,10 +66,12 @@ re-js-component --name=componentName --dumb=true
 * A folder will be created based on name flag value. It will treated as component name.
 * Based on command run, file generated will be either typescript (tsx, ts) or javascript (jsx, js).
 * Following file will be generated based on the command used -
-> <b>re-ts-component</b>:  Action, Component, Constant, Container, Helper, Model, Query, Reducer<br/>
-> <b>re-ts-component, dumb</b>:  Component, Constant, Helper<br/>
-> <b>re-js-component</b>: Action, Component, Constant, Container, Helper, Query, Reducer<br/>
-> <b>re-js-component, dumb</b>:  Component, Constant, Helper <br/>
+> <b>re-ts-component, SMART</b>: Action, Component (class), Constant, Container, Helper, Model, Query, Reducer <br/>
+> <b>re-ts-component, SUB-SMART</b>: Component (class) , Model, Constant, Helper <br/>
+> <b>re-ts-component, DUMB</b>: Component (function), Model <br/>
+> <b>re-js-component, SMART</b>: Action, Component (class), Constant, Container, Helper, Query, Reducer <br/>
+> <b>re-js-component, SUB-SMART</b>: Component (class), Constant, Helper <br/>
+> <b>re-ts-component, DUMB</b>: Component (function) <br/>
 
 <br/>&nbsp;
 

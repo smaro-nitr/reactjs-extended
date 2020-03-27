@@ -21,12 +21,28 @@ const getCustomArgs = args => {
 }
 
 const getTemplateBasePath = () => {
-  const npmGlobalPath =  process.env.npm_config_prefix
+  const npmGlobalPath = process.env.npm_config_prefix
   const templateBasePath = path.join(npmGlobalPath, 'node_modules', 'reactjs-extended')
   return templateBasePath
 }
 
-const generateComponentFolder = (targetBasePath, componentName = 'default') => {
+const getTemplateFolderName = (componentType, isJsVariant = false) => {
+  switch (componentType) {
+    case Constant.ARGS.type.sub:
+      templateFolderName = isJsVariant ? Constant.IO.jsSubTemplateFolder : Constant.IO.tsSubTemplateFolder
+      break
+    case Constant.ARGS.type.dumb:
+      templateFolderName = isJsVariant ? Constant.IO.jsDumbTemplateFolder : Constant.IO.tsDumbTemplateFolder
+      break
+    default:
+      templateFolderName = isJsVariant ? Constant.IO.jsTemplateFolder : Constant.IO.tsTemplateFolder
+      break
+  }
+
+  return templateFolderName
+}
+
+const generateComponentFolder = (targetBasePath, componentName = 'Default') => {
   const outputFolderPath = path.join(targetBasePath, componentName)
 
   if (fs.existsSync(outputFolderPath)) {
@@ -37,7 +53,7 @@ const generateComponentFolder = (targetBasePath, componentName = 'default') => {
   fs.mkdirSync(outputFolderPath)
 }
 
-const generateComponent = (targetBasePath, componentName = 'default', templateFolderName) => {
+const generateComponent = (targetBasePath, componentName = 'Default', templateFolderName) => {
   const componentTemplateFolderPath = path.join(getTemplateBasePath(), 'app', 'template', templateFolderName)
 
   const componentTemplateFileName = []
@@ -62,6 +78,7 @@ const generateComponent = (targetBasePath, componentName = 'default', templateFo
 
 const exportModule = {
   getCustomArgs,
+  getTemplateFolderName,
   generateComponentFolder,
   generateComponent
 }

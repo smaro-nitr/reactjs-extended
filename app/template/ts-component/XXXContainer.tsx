@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux'
 import XXX from './XXXComponent'
 import { } from './XXXAction'
 
-import { MainState } from '../store/mainReducer' // check import path
+import { MainState } from '../../store/mainReducer' // check import path
 
 const mapStateToProps = (state: MainState) => {
   return {}

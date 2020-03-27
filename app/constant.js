@@ -1,3 +1,11 @@
+const ARGS = {
+  type: {
+    normal: 'SMART',
+    sub: 'SUB-SMART',
+    dumb: 'DUMB'
+  }  
+}
+
 const COLOR = {
   black: '\x1b[90m',
   blue: '\x1b[94m',
@@ -11,10 +19,12 @@ const COLOR = {
 };
 
 const IO = {
-  jsDumbTemplateFolder: 'js-dumb-component',
   jsTemplateFolder: 'js-component',
-  tsDumbTemplateFolder: 'ts-dumb-component',
+  jsSubTemplateFolder: 'js-sub-component',
+  jsDumbTemplateFolder: 'js-dumb-component',
   tsTemplateFolder: 'ts-component',
+  tsSubTemplateFolder: 'ts-sub-component',
+  tsDumbTemplateFolder: 'ts-dumb-component',
 };
 
 const MESSAGE = {
@@ -23,4 +33,4 @@ const MESSAGE = {
   created: 'Created ... '
 };
 
-module.exports = { COLOR, IO, MESSAGE };
+module.exports = { ARGS, COLOR, IO, MESSAGE };
