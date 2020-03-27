@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 
 const Helper = require('./helper')
-const Constant = require('./constant')
 
 const [...args] = process.argv
 const customArgs = Helper.getCustomArgs(args)
