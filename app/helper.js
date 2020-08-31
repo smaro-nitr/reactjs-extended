@@ -3,11 +3,11 @@ const path = require('path')
 
 const Constant = require('./constant')
 
-const getCustomArgs = args => {
+const getCustomArgs = (args) => {
   const customArgs = {}
 
   Array.isArray(args) &&
-    args.forEach(eachArg => {
+    args.forEach((eachArg) => {
       const customArgEqualToIndex = eachArg.indexOf('=')
       const removeCustomArgFlagNotion = eachArg.replace(/^--+/i, '')
       if (customArgEqualToIndex > 0 && removeCustomArgFlagNotion) {
@@ -20,26 +20,47 @@ const getCustomArgs = args => {
   return customArgs
 }
 
+const validateCustomArgs = (customArgs) => {
+  let isValid = true
+  Constant.ARGS.argsList.forEach((item) => {
+    const { key, mandatory, errorMsg } = item
+    if (mandatory && !customArgs[key]) {
+      console.log(Constant.COLOR.red, errorMsg, Constant.COLOR.reset)
+      isValid = false
+    }
+  })
+  return isValid
+}
+
 const getTemplateBasePath = () => {
   const npmGlobalPath = process.env.npm_config_prefix || process.env.dp0
   const templateBasePath = path.join(npmGlobalPath, 'node_modules', 'reactjs-extended')
   return templateBasePath
 }
 
-const getTemplateFolderName = (componentType, isJsVariant = false) => {
-  switch (componentType) {
-    case Constant.ARGS.type.sub:
-      templateFolderName = isJsVariant ? Constant.IO.jsSubTemplateFolder : Constant.IO.tsSubTemplateFolder
+const getTemplateFolderDetail = (componentTemplate) => {
+  let name = ''
+  let isCustom = false
+  switch (componentTemplate) {
+    case Constant.ARGS.template.tsSmartClass:
+      name = Constant.IO.tsSmartTemplateFolder
       break
-    case Constant.ARGS.type.dumb:
-      templateFolderName = isJsVariant ? Constant.IO.jsDumbTemplateFolder : Constant.IO.tsDumbTemplateFolder
+    case Constant.ARGS.template.tsDumbFunction:
+      name = Constant.IO.tsDumbTemplateFolder
+      break
+    case Constant.ARGS.template.jsSmartClass:
+      name = Constant.IO.jsSmartTemplateFolder
+      break
+    case Constant.ARGS.template.jsDumbFunction:
+      name = Constant.IO.jsDumbTemplateFolder
       break
     default:
-      templateFolderName = isJsVariant ? Constant.IO.jsTemplateFolder : Constant.IO.tsTemplateFolder
+      name = componentTemplate
+      isCustom = true
       break
   }
 
-  return templateFolderName
+  return { name, isCustom }
 }
 
 const generateComponentFolder = (targetBasePath, componentName = 'Default') => {
@@ -53,15 +74,28 @@ const generateComponentFolder = (targetBasePath, componentName = 'Default') => {
   fs.mkdirSync(outputFolderPath)
 }
 
-const generateComponent = (targetBasePath, componentName = 'Default', templateFolderName) => {
-  const componentTemplateFolderPath = path.join(getTemplateBasePath(), 'app', 'template', templateFolderName)
+const generateComponent = (targetBasePath, componentName, componentTemplate) => {
+  const { name, isCustom } = getTemplateFolderDetail(componentTemplate)
+  const componentTemplateFolderPath = path.join(
+    getTemplateBasePath(),
+    'app',
+    'template',
+    isCustom ? 'custom' : 'component',
+    name
+  )
+
+  if (isCustom && !fs.existsSync(componentTemplateFolderPath)) {
+    const errorMsg = `${Constant.MESSAGE.customTemplateFolder} at ${componentTemplateFolderPath}`
+    console.log(Constant.COLOR.red, errorMsg, Constant.COLOR.reset)
+    process.exit()
+  }
 
   const componentTemplateFileName = []
-  fs.readdirSync(componentTemplateFolderPath).forEach(file => {
+  fs.readdirSync(componentTemplateFolderPath).forEach((file) => {
     componentTemplateFileName.push(file)
   })
 
-  componentTemplateFileName.forEach(eachFileName => {
+  componentTemplateFileName.forEach((eachFileName) => {
     const eachFileInputPath = path.join(componentTemplateFolderPath, eachFileName)
     const eachFileContent = fs.readFileSync(eachFileInputPath, 'utf8')
 
@@ -69,7 +103,7 @@ const generateComponent = (targetBasePath, componentName = 'Default', templateFo
     const eachFileNewContent = eachFileContent.replace(/XXX/g, componentName)
 
     const eachFileOutputPath = path.join(targetBasePath, componentName, eachFileNewName)
-    fs.writeFile(eachFileOutputPath, eachFileNewContent, function(err) {
+    fs.writeFile(eachFileOutputPath, eachFileNewContent, function (err) {
       if (err) console.log(Constant.COLOR.red, Constant.MESSAGE.standardError, Constant.COLOR.reset)
       console.log(Constant.COLOR.green, `${Constant.MESSAGE.created} ${eachFileOutputPath}`, Constant.COLOR.reset)
     })
@@ -78,9 +112,10 @@ const generateComponent = (targetBasePath, componentName = 'Default', templateFo
 
 const exportModule = {
   getCustomArgs,
-  getTemplateFolderName,
+  validateCustomArgs,
   generateComponentFolder,
-  generateComponent
+  generateComponent,
+  getTemplateBasePath,
 }
 
 module.exports = exportModule

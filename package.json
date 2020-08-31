@@ -1,14 +1,14 @@
 {
   "name": "reactjs-extended",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Extended CLI for ReactJs repetative task",
   "scripts": {
-    "debug-ts-component": "node app/createTsComponent.js",
-    "debug-js-component": "node app/createJsComponent.js"
+    "debug-reactjs-extended": "node app/index.js",
+    "debug-reactjs-extended-help": "node app/index-help.js"
   },
   "bin": {
-    "re-ts-component": "app/createTsComponent.js",
-    "re-js-component": "app/createJsComponent.js"
+    "reactjs-extended": "app/index.js",
+    "reactjs-extended-help": "app/index-help.js"
   },
   "author": "Subhendu Kumar Sahoo <smaro.nitr@gmail.com>",
   "license": "MIT",
@@ -21,12 +21,13 @@
     "extended-usability",
     "typescript component",
     "javascript component",
-    "smart component",
-    "sub smart component",
-    "dumb component"
+    "smart class component",
+    "dumb function component",
+    "custom template"
   ],
   "bugs": {
     "url": "https://github.com/smaro-nitr/reactjs-extended/issues"
   },
-  "homepage": "https://github.com/smaro-nitr/reactjs-extended#readme"
+  "homepage": "https://github.com/smaro-nitr/reactjs-extended#readme",
+  "dependencies": {}
 }

@@ -1,0 +1,11 @@
+- create folder inside this "custom" folder
+- place your template file that folder
+
+
+NOTE
+- only the keyword "XXX" will be replaced with "name" value passed as argument
+- both filename and file content will be replaced
+
+
+e.g.
+- custom > template1 > file1.tsx, XXXtemp.js, etc.

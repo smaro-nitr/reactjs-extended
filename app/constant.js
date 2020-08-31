@@ -1,9 +1,14 @@
 const ARGS = {
-  type: {
-    normal: 'SMART',
-    sub: 'SUB-SMART',
-    dumb: 'DUMB'
-  }  
+  argsList: [
+    { key: 'name', mandatory: true, errorMsg: '--name flag is required' },
+    { key: 'template', mandatory: true, errorMsg: '--template flag is required' },
+  ],
+  template: {
+    jsSmartClass: 'JS-SMART-CLASS',
+    jsDumbFunction: 'JS-DUMB-FUNCTION',
+    tsSmartClass: 'TS-SMART-CLASS',
+    tsDumbFunction: 'TS-DUMB-FUNCTION',
+  },
 }
 
 const COLOR = {
@@ -15,22 +20,21 @@ const COLOR = {
   magenta: '\x1b[95m',
   red: '\x1b[91m',
   reset: '\x1b[0m',
-  yellow: '\x1b[93m'
-};
+  yellow: '\x1b[93m',
+}
 
 const IO = {
-  jsTemplateFolder: 'js-component',
-  jsSubTemplateFolder: 'js-sub-component',
-  jsDumbTemplateFolder: 'js-dumb-component',
-  tsTemplateFolder: 'ts-component',
-  tsSubTemplateFolder: 'ts-sub-component',
-  tsDumbTemplateFolder: 'ts-dumb-component',
-};
+  jsSmartTemplateFolder: 'js-smart-class',
+  jsDumbTemplateFolder: 'js-dumb-function',
+  tsSmartTemplateFolder: 'ts-smart-class',
+  tsDumbTemplateFolder: 'ts-dumb-function',
+}
 
 const MESSAGE = {
   alreadyExist: 'Component with similar name already exist',
+  created: 'Created ... ',
+  customTemplateFolder: 'Couldn`t find custom template',
   standardError: 'Something went wrong',
-  created: 'Created ... '
-};
+}
 
-module.exports = { ARGS, COLOR, IO, MESSAGE };
+module.exports = { ARGS, COLOR, IO, MESSAGE }
